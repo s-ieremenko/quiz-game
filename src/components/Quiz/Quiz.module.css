@@ -1,0 +1,78 @@
+
+.quizContainer h3 {
+    font-family: 'Karla', sans-serif;
+    font-weight: 700;
+}
+
+.quizContainer {
+    margin: 1em auto;
+}
+
+.answersList {
+    display: inline-flex;
+    justify-content: flex-start;
+    padding: 1em 0;
+    align-items: center;
+    border-radius: 0.5em;
+    border-bottom: 1px solid #DBDEF0;
+
+}
+
+
+.answersList li {
+    margin-right: 0.6em;
+}
+
+.answersList li:last-child {
+    margin-right: 0;
+}
+
+.answersList button {
+    border-radius: 0.6em;
+    font-size: 0.7rem;
+    border: 1px solid #4D5B9E;
+    padding: 0.2em 0.5em;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+}
+
+.answerButton {
+    cursor: pointer;
+}
+
+.selectedButton {
+    background: #D6DBF5;
+}
+
+.green {
+    background: #94D7A2;
+}
+
+.wrong {
+    background: #F8BCBC;
+}
+
+@media screen and (min-width: 400px) and (max-width: 600px) {
+    .answersList {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .answersList li {
+        width: 45%;
+    }
+
+    .answersList button {
+        width: 100%;
+    }
+
+}
+
+@media screen and (max-width: 400px) {
+    .answersList {
+        flex-direction: column;
+        width: 100%;
+        align-items: flex-start;
+    }
+
+}

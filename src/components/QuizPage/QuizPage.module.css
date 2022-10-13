@@ -1,0 +1,48 @@
+/*main {*/
+/*    max-width: 100vh;*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*}*/
+
+.mainContainer {
+    width: 90%;
+    max-width: 600px;
+    background: #F5F7FB;
+    margin: 0 auto;
+    padding: 1.5em 1em;
+}
+
+.content {
+    width: 95%;
+    margin: 0 auto;
+}
+
+.containerFluid {
+    margin: 0;
+    padding: 0;
+}
+
+.checkButton, .startButton {
+    display: block;
+    margin: 0 auto;
+    background: #4D5B9E;
+    border-radius: 0.8em;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    color: #ffff;
+    padding: 0.5em 1em;
+    border: none;
+    cursor: pointer;
+
+}
+
+.checkButton:disabled {
+    background: lightblue;
+}
+
+footer {
+    display: flex;
+    align-items: center;
+}
