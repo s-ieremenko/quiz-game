@@ -6,23 +6,23 @@
 /*    align-items: center;*/
 /*}*/
 
+
+.containerFluid {
+    margin: 0;
+    padding: 0;
+}
+
 .mainContainer {
     width: 90%;
     max-width: 600px;
     background: #F5F7FB;
     margin: 0 auto;
     padding: 1.5em 1em;
-    height: 100%;
 }
 
 .content {
     width: 95%;
     margin: 0 auto;
-}
-
-.containerFluid {
-    margin: 0;
-    padding: 0;
 }
 
 .checkButton, .startButton {

@@ -9,7 +9,7 @@ html, body {
 body {
     background: #F5F7FB;
     width: 100vw;
-    height: auto;
+    height: 100%;
     position: relative;
 
 }
@@ -21,7 +21,7 @@ body {
 }
 
 .main-container {
-    height: 100vh;
+    min-height: 100vh;
     min-width: 100%;
     position: relative;
 
@@ -52,6 +52,11 @@ body {
     }
 }
 
+@media screen and (max-width: 900px) {
+    .main-container:before, .main-container:after {
+        height: 0;
+    }
+}
 
 .app-container {
     max-width: 412px;
