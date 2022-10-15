@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+
 import styles from './QuizPage.module.css'
 import Quiz from "../Quiz/Quiz";
 
@@ -8,9 +9,14 @@ const QuizPage = () => {
     const [selectedAnswers, setSelectedAnswers] = useState({})
     const [correctAnswers, setCorrectAnswers] = useState([])
     const [isEnd, setIsEnd] = useState(false)
+    const [currentPage, setCurrentPage] = useState(1)
+    const [quizesPerPage] = useState(5)
+    const [loading, setLoading] = useState(true)
+    const [error, setError] = useState(false)
+    const [isNewGame, setIsNewGame] = useState(false)
+    const [score, setScore] = useState(0)
 
-
-    const url = 'https://opentdb.com/api.php?amount=10&category=26&difficulty=easy&type=multiple'
+    const url = 'https://opentdb.com/api.php?amount=50&category=27&type=multiple'
 
     const getQuizWithRandomAnswersOrder = (array) => {
         return array.map(item => ({
@@ -20,57 +26,73 @@ const QuizPage = () => {
         }))
     }
 
-    const fetchData = () => {
-        fetch(url, {
-            mode: 'cors'
-        })
-            .then((res) => {
-                if (res.status >= 200 && res.status < 300) {
-                    return res.json()
-                } else {
-                    // setIsLoading(false)
-                    // setIsError(true)
-                    throw new Error(res.statusText)
-                }
-            }).then(res => {
-            setQuizes(getQuizWithRandomAnswersOrder(res.results))
-
-
-        }).catch(e => console.log(e))
-    }
-
 
     useEffect(() => {
-        fetchData()
-    }, [])
+        const fetchData = async () => {
+            try {
+                const res = await fetch(url, {
+                    mode: 'cors'
+                })
+                const data = await res.json()
+                setQuizes(getQuizWithRandomAnswersOrder(data.results))
+                setLoading(false)
+            } catch (e) {
+                setError(e)
+            }
+        }
+        fetchData().then(resp => resp)
 
-    const handleStartClick = () => {
+    }, [isNewGame])
+
+    const clearSettings = () => {
         setIsEnd(false)
         setIsSubmitted(false)
         setCorrectAnswers([])
         setSelectedAnswers({})
-        fetchData()
+    }
 
+    const handleNextClick = () => {
+        clearSettings()
+        setCurrentPage(prev => prev + 1)
+    }
 
+    const handleNewGameClick = () => {
+        clearSettings()
+        setIsNewGame(true)
     }
 
     function shuffleArray(array) {
         return [...array].sort(() => Math.random() - 0.5)
     }
 
-    const isDisabled = Object.keys(selectedAnswers).length !== quizes.length
+    const indexOfLastQuiz = currentPage * quizesPerPage
+    const indexOfFirstQuiz = indexOfLastQuiz - quizesPerPage
+    const currentQuizesList = quizes.slice(indexOfFirstQuiz, indexOfLastQuiz)
+
+    const checkAnswersIsDisabled = Object.keys(selectedAnswers).length !== currentQuizesList.length
+
+    const isLastPage = Math.ceil(quizes.length / quizesPerPage) === currentPage
+    const nextButtonTitle = isLastPage ? 'New game' : 'Next quiz'
+
 
     const handleClick = () => {
-        if (!isDisabled) {
-            const correctResults = quizes.filter(quiz => {
+        if (!checkAnswersIsDisabled) {
+            const correctResults = currentQuizesList.filter(quiz => {
                 return quiz.correct_answer === selectedAnswers?.[quiz.question]
             })
             correctResults && setCorrectAnswers(prev => [...prev, ...correctResults])
             setIsSubmitted(true)
             setIsEnd(true)
+            setScore(prev => prev + correctResults.length)
         }
+    }
 
 
+    if (loading) {
+        return <h3>loading ...</h3>
+    }
+    if (error) {
+        return <h3>Error</h3>
     }
 
 
@@ -78,7 +100,7 @@ const QuizPage = () => {
         <div className={styles.containerFluid}>
             <div className={styles.mainContainer}>
                 <div className={styles.content}>
-                    {quizes?.map(quiz => {
+                    {currentQuizesList?.map(quiz => {
                         const {
                             question, allAnswers, correct_answer,
                         } = quiz
@@ -90,13 +112,18 @@ const QuizPage = () => {
                     })}
                     <footer>
                         {!isEnd && <button className={styles.checkButton} onClick={handleClick}
-                                           disabled={isDisabled}>CheckAnswers
+                                           disabled={checkAnswersIsDisabled}>CheckAnswers
                         </button>}
                         {isEnd &&
                             <>
-                                <span>Correct answers: {correctAnswers.length}/{quizes.length}</span>
-                                <button className={styles.startButton} onClick={handleStartClick}>Play again</button>
+                                <div className={styles.scoreContainer}>
+                                    <p>Correct answers: {correctAnswers.length}/{currentQuizesList.length}</p>
+                                    {isSubmitted && isLastPage && <p>Total correct answers: {score}/{quizes.length}</p>}
+                                </div>
+                                <button className={styles.startButton}
+                                        onClick={isLastPage ? handleNewGameClick : handleNextClick}>{nextButtonTitle}</button>
                             </>}
+
                     </footer>
 
 

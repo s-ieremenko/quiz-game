@@ -9,7 +9,7 @@ function App() {
         <div className='main-container'>
             <div className='app-container'>
                 <h1>Quizzical</h1>
-                <p>Some description if needed</p>
+                <p>Check your knowledge!</p>
                 <Link to='/quiz'>Start quiz</Link>
 
             </div>
