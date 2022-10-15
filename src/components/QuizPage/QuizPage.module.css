@@ -1,9 +1,18 @@
+/*main {*/
+/*    max-width: 100vh;*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*}*/
+
 .mainContainer {
     width: 90%;
     max-width: 600px;
     background: #F5F7FB;
     margin: 0 auto;
     padding: 1.5em 1em;
+    height: 100%;
 }
 
 .content {

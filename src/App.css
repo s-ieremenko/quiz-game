@@ -9,7 +9,7 @@ html, body {
 body {
     background: #F5F7FB;
     width: 100vw;
-    height: 100%;
+    height: auto;
     position: relative;
 
 }
@@ -17,6 +17,7 @@ body {
 .intro-container {
     display: grid;
     place-items: center;
+
 }
 
 .main-container {
@@ -53,7 +54,8 @@ body {
 
 
 .app-container {
-    max-width: 412px;
+    min-width: 412px;
+    max-width: 100vh;
     box-shadow: 2px 1px 3px 2px rgb(158 125 125 / 30%);
     padding: 50px;
 }
