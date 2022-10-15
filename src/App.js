@@ -6,7 +6,7 @@ import './App.css';
 
 function App() {
     return (
-        <div className='main-container'>
+        <div className='main-container intro-container'>
             <div className='app-container'>
                 <h1>Quizzical</h1>
                 <p>Check your knowledge!</p>

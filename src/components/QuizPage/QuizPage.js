@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import styles from './QuizPage.module.css'
 import Quiz from "../Quiz/Quiz";
+import { url } from '../../constants'
 
 const QuizPage = () => {
     const [quizes, setQuizes] = useState([])
@@ -16,7 +17,6 @@ const QuizPage = () => {
     const [isNewGame, setIsNewGame] = useState(false)
     const [score, setScore] = useState(0)
 
-    const url = 'https://opentdb.com/api.php?amount=50&category=27&type=multiple'
 
     const getQuizWithRandomAnswersOrder = (array) => {
         return array.map(item => ({
@@ -97,7 +97,7 @@ const QuizPage = () => {
 
 
     return (
-        <div className={styles.containerFluid}>
+        <div className='main-container'>
             <div className={styles.mainContainer}>
                 <div className={styles.content}>
                     {currentQuizesList?.map(quiz => {

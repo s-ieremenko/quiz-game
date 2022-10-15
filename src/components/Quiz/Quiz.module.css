@@ -62,17 +62,32 @@
         width: 45%;
     }
 
+    .answersList li:nth-child(-n+2) {
+        margin-bottom: 0.5em;
+    }
+
+
     .answersList button {
         width: 100%;
+        font-size: 0.6rem;
     }
 
 }
 
 @media screen and (max-width: 400px) {
     .answersList {
+        display: flex;
         flex-direction: column;
         width: 100%;
-        align-items: flex-start;
+        gap: 0.6em;
     }
 
+    .answersList li {
+        width: 100%;
+        margin-right: 0;
+    }
+
+    .answersList button {
+        width: 100%;
+    }
 }

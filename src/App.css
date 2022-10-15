@@ -10,12 +10,44 @@ body {
 
 }
 
-.main-container {
+.intro-container {
     display: grid;
     place-items: center;
+}
+
+.main-container {
     height: 100vh;
+    min-width: 100%;
+    position: relative;
+    overflow: hidden;
 
 }
+
+.main-container:before {
+    content: "";
+    height: 145px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: url("./images/background-bottom.png") no-repeat 100% 0;
+}
+
+.main-container:after {
+    content: "";
+    height: 115px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background: url("./images/background-top.png") no-repeat;
+}
+
+
+@media screen and (min-width: 900px) {
+    .main-container:before, .main-container:after {
+        width: calc((100vw - 600px) / 2);
+    }
+}
+
 
 .app-container {
     min-width: 412px;
