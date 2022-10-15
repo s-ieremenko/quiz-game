@@ -2,12 +2,15 @@
     box-sizing: border-box;
 }
 
+html, body {
+    overflow-x: hidden;
+}
+
 body {
     background: #F5F7FB;
-    overflow: auto;
     width: 100vw;
-    height: 100vh;
-    font-size: 18px;
+    height: 100%;
+    position: relative;
 
 }
 
@@ -20,7 +23,6 @@ body {
     height: 100vh;
     min-width: 100%;
     position: relative;
-    overflow: hidden;
 
 }
 
@@ -51,8 +53,7 @@ body {
 
 
 .app-container {
-    min-width: 412px;
-    max-width: 100vh;
+    max-width: 412px;
     box-shadow: 2px 1px 3px 2px rgb(158 125 125 / 30%);
     padding: 50px;
 }
